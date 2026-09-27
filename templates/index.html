@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Service Booking System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f4f6f8;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .booking {
+            background: white;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Vehicle Service Booking System</h1>
+
+    <form action="/book" method="POST">
+
+        <label>Customer Name</label>
+        <input
+            type="text"
+            name="customer_name"
+            placeholder="Enter customer name"
+            required
+        >
+
+        <label>Vehicle Number</label>
+        <input
+            type="text"
+            name="vehicle_number"
+            placeholder="Enter vehicle number"
+            required
+        >
+
+        <label>Vehicle Type</label>
+        <select name="vehicle_type" required>
+            <option value="">Select vehicle type</option>
+            <option value="Car">Car</option>
+            <option value="Bike">Bike</option>
+            <option value="Scooter">Scooter</option>
+        </select>
+
+        <label>Service Type</label>
+        <select name="service_type" required>
+            <option value="">Select service</option>
+            <option value="General Service">General Service</option>
+            <option value="Oil Change">Oil Change</option>
+            <option value="Brake Service">Brake Service</option>
+            <option value="Engine Check">Engine Check</option>
+        </select>
+
+        <label>Preferred Date</label>
+        <input
+            type="date"
+            name="service_date"
+            required
+        >
+
+        <label>Contact Number</label>
+        <input
+            type="tel"
+            name="contact_number"
+            placeholder="Enter contact number"
+            required
+        >
+
+        <button type="submit">Book Service</button>
+
+    </form>
+
+    <h2>Service Bookings</h2>
+
+    {% if bookings %}
+
+        {% for booking in bookings %}
+
+            <div class="booking">
+
+                <strong>{{ booking.customer_name }}</strong>
+
+                <p>
+                    Vehicle:
+                    {{ booking.vehicle_number }}
+                    ({{ booking.vehicle_type }})
+                </p>
+
+                <p>
+                    Service:
+                    {{ booking.service_type }}
+                </p>
+
+                <p>
+                    Date:
+                    {{ booking.service_date }}
+                </p>
+
+                <p>
+                    Contact:
+                    {{ booking.contact_number }}
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No service bookings yet.</p>
+
+    {% endif %}
+
+    <footer>
+        Deployed Commit: {{ commit }}
+    </footer>
+
+</body>
+
+</html>
