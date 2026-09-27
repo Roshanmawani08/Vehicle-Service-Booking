@@ -35,6 +35,9 @@ def book_service():
     ):
         return "All fields are required.", 400
 
+    if not contact_number.isdigit() or len(contact_number) != 10:
+        return "Contact number must be exactly 10 digits.", 400
+
     booking = {
         "customer_name": customer_name,
         "vehicle_number": vehicle_number,
